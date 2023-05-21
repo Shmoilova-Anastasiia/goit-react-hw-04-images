@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
     Header,
     SearchForm,
@@ -8,29 +8,25 @@ import {
 import { HiSearch } from "react-icons/hi";
 import { toast } from 'react-toastify';
 
-export class Searchbar extends Component {
-    state = {
-        query: '',
-    }
+export const Searchbar = ({onSubmit}) => {
+    const [query, setQuery] = useState('');
 
-    handleChange = e => {
-        this.setState({ query: e.currentTarget.value });
+    const handleChange = e=> {
+        setQuery(e.currentTarget.value);
     };
 
-    handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault();
-        if (this.state.query.trim() === '') {
-           return toast.warn('Please enter your request!');
-            
-        };
-        this.props.onSubmit(this.state.query);
-        this.setState({ query: '' });
+        if (query.trim() === '') {
+           toast.warn('Please enter your request!');
+            return;
+        }onSubmit(query);
+        setQuery('');
     }
-    render() {
-        const { query } = this.state;
+    
         return (
             <Header>
-                <SearchForm onSubmit={this.handleSubmit}>
+                <SearchForm onSubmit={handleSubmit}>
                     <SearchFormButton
                         type="submit">
                         <HiSearch size="24" />
@@ -39,7 +35,7 @@ export class Searchbar extends Component {
                         type="text"
                         name='query'
                         value={query}
-                        onChange={this.handleChange}
+                        onChange={handleChange}
                         autocomplete="off"
                         autofocus
                         placeholder="Search images and photos">
@@ -48,4 +44,5 @@ export class Searchbar extends Component {
             </Header>
         )
     }
-}
+
+
