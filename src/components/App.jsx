@@ -69,7 +69,7 @@ export const App = () => {
   };
 
   const toggleModal = largeImageURL => {
-    setShowModal (showModal);
+    setShowModal (!showModal);
     setLargeImageURL(largeImageURL);
   };
 
