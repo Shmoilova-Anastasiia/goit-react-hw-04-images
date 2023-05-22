@@ -8,15 +8,14 @@ import {
 export const Modal = ({onClose, children}) => {
 
   useEffect(() => {
-    window.addEventListener('keydown', handleClose);
-    return window.removeEventListener('keydown', handleClose);
-  })
-
-  const handleClose = e => {
+    const handleClose = e => {
     if (e.code === 'Escape') {
       onClose('');
     }
   };
+    window.addEventListener('keydown', handleClose);
+    return () => window.removeEventListener('keydown', handleClose);
+  })
 
   const handleBackdropeClick = e => {
     if (e.target === e.currentTarget) {

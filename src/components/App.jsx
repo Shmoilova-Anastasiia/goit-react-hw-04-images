@@ -23,10 +23,7 @@ export const App = () => {
 
   useEffect(() => {
     if (!query) return;
-      getData(query, page);
-  }, [query, page]);
-
-  const getData = (query, page) => {
+    const getData = (query, page) => {
     setIsLoading(true);
     getImages(query, page)
       .then(({ hits, totalHits }) => {
@@ -56,6 +53,10 @@ export const App = () => {
       .catch(error => setError(error))
       .finally(() => setIsLoading (false));
   }
+      getData(query, page);
+  }, [query, page]);
+
+  
   const handleSubmit = query => {
     setQuery(query);
     setPage(1);
